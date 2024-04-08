@@ -11,7 +11,7 @@
 	<groupId>insper.store</groupId>
 	<artifactId>products-resource</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>products-resource</name>
+	<name>products :: resource</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
