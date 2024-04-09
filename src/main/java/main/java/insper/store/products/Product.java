@@ -13,8 +13,9 @@ import lombok.experimental.Accessors;
 public class Product {
     
     private String id;
+    private String id_partner;
     private String name;
     private String description;
-    private String price;
-    private String quantity;
+    private Double price;
+    private Integer quantity;
 }

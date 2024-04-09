@@ -1,9 +1,7 @@
 package main.java.insper.store.products;
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,11 +22,17 @@ public class ProductService {
         return productRepository.findById(id).map(ProductModel::to).orElse(null);
     }
 
-    public Product update(Product in) {
+    public Product update(@NonNull String id, Product in) {
         return productRepository.save(new ProductModel(in)).to();
     }
 
     public void delete(@NonNull String id) {
         productRepository.deleteById(id);
+    }
+
+    public List<ProductModel> findAll() {
+        List<ProductModel> list = new ArrayList<>();
+        productRepository.findAll().forEach(list::add);
+        return list;
     }
 }
