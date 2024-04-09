@@ -26,6 +26,9 @@ public class ProductModel {
     @Column(name = "id_product")
     private String id;
 
+    @Column(name = "id_partner")
+    private String id_partner;
+
     @Column(name = "tx_name")
     private String name;
 
@@ -40,6 +43,7 @@ public class ProductModel {
 
     public ProductModel(Product o) {
         this.id = o.id();
+        this.id_partner = o.id_partner();
         this.name = o.name();
         this.description = o.description();
         this.price = o.price();
@@ -49,6 +53,7 @@ public class ProductModel {
     public Product to() {
         return Product.builder()
             .id(id)
+            .id_partner(id_partner)
             .name(name)
             .description(description)
             .price(price)

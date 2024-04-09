@@ -1,6 +1,6 @@
 spring:
   application:
-    name: store-product
+    name: store-products
   datasource:
     url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/store}
     username: ${DATABASE_USERNAME:store}

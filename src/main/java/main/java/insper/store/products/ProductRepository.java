@@ -7,7 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProductRepository extends CrudRepository<ProductModel, String> {
-
     Optional<ProductModel> findById(String id);
-    
 }

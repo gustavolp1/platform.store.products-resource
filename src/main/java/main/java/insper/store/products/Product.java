@@ -13,6 +13,7 @@ import lombok.experimental.Accessors;
 public class Product {
     
     private String id;
+    private String id_partner;
     private String name;
     private String description;
     private Double price;
