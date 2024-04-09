@@ -1,6 +1,8 @@
 package main.java.insper.store.products;
 
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,8 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import insper.store.products.ProductIn;
+import insper.store.products.ProductOut;
+import insper.store.products.ProductsController;
+
 @RestController
-public class ProductResource implements ProductController {
+public class ProductResource implements ProductsController {
 
     @Autowired
     private ProductService productService;
@@ -46,11 +52,8 @@ public class ProductResource implements ProductController {
 
     @Override
     public ResponseEntity<ProductOut> create(ProductIn in) {
-        // parser
         Product product = ProductParser.to(in);
-        // insert using service
         product = productService.create(product);
-        // return
         return ResponseEntity.created(
             ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -61,36 +64,26 @@ public class ProductResource implements ProductController {
     }
 
     @Override
+    public ResponseEntity<List<ProductOut>> read() {
+        return ResponseEntity.ok(productService.findAll().stream().map(ProductParser::to).collect(Collectors.toList()));
+    }
+
+    @Override
     public ResponseEntity<ProductOut> read(String id) {
-        // find using service
         Product product = productService.read(id);
-        // return
         return ResponseEntity.ok(ProductParser.to(product));
     }
 
     @Override
     public ResponseEntity<ProductOut> update(String id, ProductIn in) {
-        // parser
         Product product = ProductParser.to(in);
-        // update using service
         product = productService.update(id, product);
-        // return
         return ResponseEntity.ok(ProductParser.to(product));
     }
 
     @Override
     public ResponseEntity<Void> delete(String id) {
-        // delete using service
         productService.delete(id);
-        // return
         return ResponseEntity.noContent().build();
-    }
-
-    @Override
-    public ResponseEntity<Iterable<ProductOut>> list() {
-        // list using service
-        Iterable<Product> products = productService.list();
-        // return
-        return ResponseEntity.ok(ProductParser.to(products));
     }
 }

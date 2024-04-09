@@ -33,10 +33,10 @@ public class ProductModel {
     private String description;
 
     @Column(name = "tx_price")
-    private String price;
+    private Double price;
 
     @Column(name = "tx_quantity")
-    private String quantity;
+    private Integer quantity;
 
     public ProductModel(Product o) {
         this.id = o.id();
