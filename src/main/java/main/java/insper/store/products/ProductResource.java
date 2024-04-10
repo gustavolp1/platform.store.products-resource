@@ -85,7 +85,11 @@ public class ProductResource implements ProductsController {
 
     @Override
     public ResponseEntity<Void> delete(String id) {
-        productService.delete(id);
+        try {
+            productService.delete(id);
+        } catch (IllegalArgumentException e){
+            return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.noContent().build();
     }
 }

@@ -17,7 +17,7 @@ spring:
 management:
   endpoints:
     web:
-      base-path: /product/actuator
+      base-path: /products/actuator
       exposure:
         include: [ 'prometheus' ]
 
