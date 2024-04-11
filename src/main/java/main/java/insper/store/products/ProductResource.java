@@ -71,8 +71,12 @@ public class ProductResource implements ProductsController {
 
     @Override
     public ResponseEntity<ProductOut> read(String id) {
-        Product product = productService.read(id);
-        return ResponseEntity.ok(ProductParser.to(product));
+        try {
+            Product product = productService.read(id);
+            return ResponseEntity.ok(ProductParser.to(product));
+        } catch (IllegalArgumentException e){
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @Override

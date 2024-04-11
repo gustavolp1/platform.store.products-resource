@@ -19,7 +19,7 @@ public class ProductService {
     }
 
     public Product read(@NonNull String id) {
-        return productRepository.findById(id).map(ProductModel::to).orElse(null);
+        return productRepository.findById(id).map(ProductModel::to).orElseThrow(() -> new IllegalArgumentException("Product not found"));
     }
 
     public Product update(@NonNull String id, Product in) {
