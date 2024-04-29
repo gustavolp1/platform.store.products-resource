@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import insper.store.partner.PartnerController;
 import lombok.NonNull;
 
 @Service
@@ -13,6 +13,9 @@ public class ProductService {
     
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private PartnerController partnerController;
 
     public Product create(Product in) {
         return productRepository.save(new ProductModel(in)).to();
@@ -38,5 +41,14 @@ public class ProductService {
         List<ProductModel> list = new ArrayList<>();
         productRepository.findAll().forEach(list::add);
         return list;
+    }
+
+    public boolean isValidUser(String identifier){
+        try {
+            partnerController.findUser(identifier);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

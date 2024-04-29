@@ -53,6 +53,10 @@ public class ProductResource implements ProductsController {
 
     @Override
     public ResponseEntity<ProductOut> create(ProductIn in) {
+        if(productService.isValidUser(in.id_partner()) == false){
+            return ResponseEntity.badRequest().build();
+        }
+
         Product product = ProductParser.to(in);
         product = productService.create(product);
         return ResponseEntity.created(

@@ -66,6 +66,11 @@
             <artifactId>product</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>insper.store</groupId>
+            <artifactId>partner</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>
