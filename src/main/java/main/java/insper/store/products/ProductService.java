@@ -20,22 +20,22 @@ public class ProductService {
     @Autowired
     private PartnerController partnerController;
 
-    @CachePut(value = "partner", key = "#results.id")
+    @CachePut(value = "product", key = "#result.id")
     public Product create(Product in) {
         return productRepository.save(new ProductModel(in)).to();
     }
 
-    @Cacheable(value = "partner", key = "#id")
+    @Cacheable(value = "product", key = "#id")
     public Product read(@NonNull String id) {
         return productRepository.findById(id).map(ProductModel::to).orElseThrow(() -> new IllegalArgumentException("Product not found"));
     }
 
-    @CachePut(value = "partner", key = "#id")
+    @CachePut(value = "product", key = "#id")
     public Product update(@NonNull String id, Product in) {
         return productRepository.save(new ProductModel(in)).to();
     }
 
-    @CacheEvict(value = "partner", key = "#id")
+    @CacheEvict(value = "product", key = "#id")
     public void delete(@NonNull String id) {
         if(productRepository.existsById(id)){
             productRepository.deleteById(id);
@@ -44,7 +44,7 @@ public class ProductService {
         }
     }
 
-    @Cacheable(value = "allpartners", key = "#id")
+    @Cacheable(value = "allproducts")
     public List<ProductModel> findAll() {
         List<ProductModel> list = new ArrayList<>();
         productRepository.findAll().forEach(list::add);
